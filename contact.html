@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact — Youmiies BookMark</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root{
+      --black:#0b0b0f;
+      --white:#ffffff;
+      --gray:#f5f5f7;
+      --muted:#6b6b76;
+
+      --header1:#fff3fb;
+      --header2:#f0fbff;
+      --headerBorder: rgba(15, 15, 25, 0.08);
+
+      --accent:#ff4fb3;
+      --accent2:#7c5cff;
+    }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html{ scroll-behavior:smooth; }
+    body{ font-family:'Poppins', sans-serif; background:var(--white); color:var(--black); }
+
+    header{
+      position: sticky; top: 0; z-index: 1000;
+      padding: 35px 70px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(90deg, var(--header1), var(--header2));
+      border-bottom: 1px solid var(--headerBorder);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: padding 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.scrolled{ padding: 12px 70px; box-shadow: 0 14px 30px rgba(0,0,0,0.08); }
+
+    .brand{ display:flex; align-items:center; gap: 12px; text-decoration:none; color:inherit; }
+    .brand-logo{
+      width: 46px; height: 46px; border-radius: 14px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+      transition: transform 0.25s ease;
+    }
+    .brand-logo img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .brand:hover .brand-logo{ transform: translateY(-2px) rotate(-1deg); }
+    .brand-title{ font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px; line-height: 1.1; }
+    .brand-sub{ font-size: 0.72rem; color: var(--muted); margin-top: 2px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; }
+
+    nav{ display:flex; gap: 26px; align-items:center; }
+    nav a{
+      text-decoration:none; color: var(--black);
+      font-size: 0.85rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      position: relative; padding: 10px 2px;
+      opacity: 0.92;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    nav a::after{
+      content:""; position:absolute; left:0; bottom: 6px;
+      width: 0%; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      transition: width 0.25s ease;
+    }
+    nav a:hover{ opacity: 1; transform: translateY(-1px); }
+    nav a:hover::after{ width: 100%; }
+    nav a.active{ opacity:1; }
+    nav a.active::after{ width:100%; }
+
+    .hero{
+      padding: 110px 80px 60px;
+      border-bottom: 1px solid #e5e5e5;
+      background:
+        radial-gradient(900px 380px at 18% 10%, rgba(255,79,179,0.10), transparent 60%),
+        radial-gradient(900px 420px at 78% 0%, rgba(124,92,255,0.10), transparent 60%),
+        #fff;
+    }
+    .hero h1{ font-size: 3rem; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.5px; }
+    .hero p{ max-width: 700px; color: var(--muted); margin-bottom: 22px; line-height: 1.6; }
+
+    .wrap{ padding: 70px 80px; }
+    .card{
+      background: #fff;
+      border: 1px solid rgba(15, 15, 25, 0.08);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 16px 34px rgba(0,0,0,0.06);
+      max-width: 860px;
+    }
+    .row{
+      display:flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .label{ font-size: 0.85rem; color: var(--muted); }
+    .email{
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      word-break: break-word;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 14px 28px;
+      border: 2px solid var(--black);
+      background:#fff;
+      color: var(--black);
+      text-decoration:none;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      letter-spacing: 0.6px;
+      border-radius: 999px;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .btn:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.14); border-color: rgba(0,0,0,0.65); }
+    .btn:active{ transform: translateY(-1px) scale(0.99); }
+
+    footer{
+      padding: 40px 80px;
+      border-top: 1px solid #e5e5e5;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px){
+      header{ padding: 16px 22px; }
+      header.scrolled{ padding: 12px 22px; }
+      .hero{ padding: 90px 22px 50px; }
+      .wrap{ padding: 55px 22px; }
+      footer{ padding: 30px 22px; }
+      nav{ gap: 14px; }
+      nav a{ font-size: 0.78rem; }
+      .hero h1{ font-size: 2.2rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="header">
+    <a class="brand" href="index.html">
+      <div class="brand-logo">
+        <img src="5559ff1a-ab3d-44e6-8e0f-885b0735e3a5.png" alt="Logo Youmiies BookMark" />
+      </div>
+      <div>
+        <div class="brand-title">Youmiies BookMark</div>
+        <div class="brand-sub">Marque-pages</div>
+      </div>
+    </a>
+
+    <nav>
+      <a href="index.html#products">Produits</a>
+      <a href="Personalisation.html">Commander</a>
+      <a href="aboutus.html">About Us</a>
+      <a class="active" href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Contact</h1>
+    <p>
+      Une question sur un modèle, une personnalisation, ou ta commande ?  
+      Écris-nous, on te répond dès que possible.
+    </p>
+  </section>
+
+  <section class="wrap">
+    <div class="card">
+      <div class="row">
+        <div>
+          <div class="label">Email</div>
+        
+          <div class="email">youmiiesbookmark@gmail.com</div>
+        </div>
+
+       
+        <a class="btn" href="mailto:youmiiesbookmark@gmail.com?subject=Question%20-%20Youmiies%20BookMark">
+          Envoyer un email
+        </a>
+      </div>
+
+      <div style="margin-top:18px; color: var(--muted); font-size:0.9rem; line-height:1.7;">
+        Pense à préciser : le modèle, la personnalisation souhaitée (texte/couleurs) et le délai si c’est urgent ✨
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Youmiies BookMark — Tous droits réservés</footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    });
+  </script>
+
+</body>
+</html>
